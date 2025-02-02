@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../lib/utils";
+import GithubCommentScript from "./components/github-comment-script.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -28,8 +29,9 @@ const { Content } = await post.render();
     <p class="mb-1 font-medium text-zinc-500">
       {formatDate(post.data.date)}
     </p>
-    <article>
+    <article class="border-b border-zinc-200 pb-6 dark:border-zinc-700">
       <Content />
     </article>
+    <GithubCommentScript />
   </main>
 </Layout>
