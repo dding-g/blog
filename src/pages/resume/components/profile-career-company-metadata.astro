@@ -1,0 +1,48 @@
+---
+import { calculateEmploymentPeriod } from "@/utils/date";
+
+interface Props {
+  logo: {
+    src: string;
+    width: number;
+    height: number;
+  };
+  company: string;
+  position: string;
+  team: string;
+  workStartDate: string;
+  workEndDate: string;
+  working: boolean;
+  link: string;
+}
+
+const {
+  company,
+  position,
+  team,
+  workStartDate,
+  workEndDate,
+  working,
+  link,
+  logo,
+} = Astro.props;
+
+const period = calculateEmploymentPeriod(workStartDate, workEndDate);
+---
+
+<div>
+  <img width={logo.width} height={logo.height} src={logo.src} alt={company} />
+  <div>
+    <a href={link} class="text-lg font-bold hover:underline">
+      {company}
+    </a>
+    <p class="text-sm">
+      {position} / {team}
+    </p>
+    <p class="text-sm">
+      {workStartDate} ~{" "}
+      {working ? "현재" : workEndDate}
+      ({period})
+    </p>
+  </div>
+</div>

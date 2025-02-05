@@ -1,11 +1,16 @@
 ---
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 import Layout from "@/layouts/Layout.astro";
+import ProfileCareer from "./components/profile-career.astro";
 import ProfileHeader from "./components/profile-header.astro";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main>
     <ProfileHeader />
+    <hr class="my-10" />
+
+    <!-- career -->
+    <ProfileCareer />
   </main>
 </Layout>
