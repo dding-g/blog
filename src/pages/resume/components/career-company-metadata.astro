@@ -24,7 +24,7 @@ const {
   workEndDate,
   working,
   link,
-  logo,
+  logo = { src: "", width: 0, height: 0 },
 } = Astro.props;
 
 const period = calculateEmploymentPeriod(workStartDate, workEndDate);
