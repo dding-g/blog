@@ -1,6 +1,6 @@
 ---
 import { getDateDiff, getPeriodText } from "@/utils/date";
-import ProfileCareerCompanyMetadata from "./profile-career-company-metadata.astro";
+import CareerCompanyMetadata from "./career-company-metadata.astro";
 
 const careers = {
   specter: {
@@ -45,7 +45,7 @@ const careerPeriod = getPeriodText(totalCareerMonth);
   <h2 class="text-2xl font-bold">경력 ({careerPeriod})</h2>
   <ul class="list-inside space-y-6">
     <li class="space-y-2">
-      <ProfileCareerCompanyMetadata {...careers.specter} />
+      <CareerCompanyMetadata {...careers.specter} />
       <div>
         {
           [
@@ -98,7 +98,7 @@ const careerPeriod = getPeriodText(totalCareerMonth);
       </div>
     </li>
     <li>
-      <ProfileCareerCompanyMetadata {...careers.goorm} />
+      <CareerCompanyMetadata {...careers.goorm} />
     </li>
   </ul>
 </div>
