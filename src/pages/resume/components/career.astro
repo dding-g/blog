@@ -1,6 +1,7 @@
 ---
 import { getDateDiff, getPeriodText } from "@/utils/date";
 import CareerCompanyMetadata from "./career-company-metadata.astro";
+import ProfileLayout from "./profile-layout.astro";
 
 const careers = {
   specter: {
@@ -10,7 +11,7 @@ const careers = {
       height: 30,
     },
     company: "스펙터(Specter)",
-    workStartDate: "2022.11",
+    workStartDate: "2022.11.07",
     workEndDate: "",
     working: true,
     position: "Software Engineer",
@@ -24,8 +25,8 @@ const careers = {
       height: 22,
     },
     company: "구름(goorm)",
-    workStartDate: "2021.01",
-    workEndDate: "2022.06",
+    workStartDate: "2021.01.04",
+    workEndDate: "2022.06.09",
     working: false,
     position: "Software Engineer",
     team: "goormIDE Squad",
@@ -41,15 +42,14 @@ const totalCareerMonth = Object.values(careers).reduce(
 const careerPeriod = getPeriodText(totalCareerMonth);
 ---
 
-<div class="space-y-8">
-  <h2 class="text-2xl font-bold">경력 ({careerPeriod})</h2>
-  <ul class="list-inside space-y-6">
+<ProfileLayout title={`경력 (${careerPeriod})`}>
+  <slot>
     <li class="space-y-2">
       <CareerCompanyMetadata {...careers.specter} />
       <div>
         {
           [
-            "비즈니스의 의사결정을 존중하고 어떻게하면 더 나은 제품을 만들 수 있을지 고민했습니다.",
+            "Pre-B Series 투자를 유치했습니다. (2024.12)",
             "프로젝트의 오너를 맡아 3개월간 프로젝트를 진행했습니다.",
             "두배 이상 커진 서비스를 어떻게 유지보수/개발 하면 좋을지 고민하고 개선했습니다.",
           ].map((text) => <p class="italic">{text}</p>)
@@ -57,48 +57,61 @@ const careerPeriod = getPeriodText(totalCareerMonth);
       </div>
 
       <div>
-        <b>JQuery → Next.js 마이그레이션</b>
-        <p>
-          - 40개 이상의 페이지들을 분석하고, 전반적인 설계, 퍼블리싱, 개발을
-          리드
-        </p>
+        <span class="font-semibold">JQuery → Next.js 마이그레이션</span>
+        <ul>
+          <li class="list-inside list-disc">
+            40개 이상의 페이지들을 분석하고, 전반적인 설계, 퍼블리싱, 개발을
+            리드
+          </li>
+        </ul>
       </div>
 
       <div>
-        <b>Frontend 인프라 구축 및 개선</b>
-        <p>
-          - AWS ECS + Fargate로 인프라 관리 <a
-            class="text-sm underline"
-            href="/posts/infra/ecs-전환"
-            >FE개발자의 ECS 전환기
-          </a><br />
-          - 여러대의 개발서버를 하나의 인스턴스에서 관리할 수 있도록 개선 <a
-            class="text-sm underline"
-            href="/posts/infra/fe개발자가-개발서버-인프라-구성한-이야기"
-            >인프라 구성기
-          </a><br />
-        </p>
+        <span class="font-semibold">Frontend 인프라 구축 및 개선</span>
+        <ul>
+          <li class="list-inside list-disc">
+            AWS ECS + Fargate로 인프라 관리 <a
+              class="text-sm underline"
+              href="/posts/infra/ecs-전환"
+              >FE개발자의 ECS 전환기
+            </a>
+          </li>
+          <li class="list-inside list-disc">
+            여러대의 개발서버를 하나의 인스턴스에서 관리할 수 있도록 개선 <a
+              class="text-sm underline"
+              href="/posts/infra/fe개발자가-개발서버-인프라-구성한-이야기"
+              >인프라 구성기
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div>
-        <b>프로젝트 오너</b>
-        <p>
-          - 프로젝트의 오너를 맡아 3개월간 프로젝트를 진행 (PO, FE, 기획 참여)<br
-          />
-          - CX팀에서 수기로 진행하던 전반적인 프로세스를 플랫폼화 <br />
-          - 운영 공수 60% 감소
-        </p>
+        <span class="font-semibold">비지정 기능 프로젝트 오너</span>
+        <ul>
+          <li class="list-inside list-disc">
+            CX팀에서 수기로 진행하던 전반적인 프로세스를 플랫폼화
+          </li>
+          <li class="list-inside list-disc">
+            프로젝트의 오너를 맡아 3개월간 프로젝트를 진행 (PO, FE, 기획 참여)
+          </li>
+          <li class="list-inside list-disc">
+            운영 공수 60% 감소, 플랫폼 매출상품 추가
+          </li>
+        </ul>
       </div>
 
       <div>
-        <b>PDF 서버 구축</b>
-        <p>
-          - react-pdf를 사용한 PDF 서버 구축 <br />
-        </p>
+        <span class="font-semibold">PDF 서버 구축</span>
+        <ul>
+          <li class="list-inside list-disc">
+            hono + react-pdf를 사용한 PDF 다운로드 서버 구축 및 운영
+          </li>
+        </ul>
       </div>
     </li>
     <li>
       <CareerCompanyMetadata {...careers.goorm} />
     </li>
-  </ul>
-</div>
+  </slot>
+</ProfileLayout>
