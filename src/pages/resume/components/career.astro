@@ -1,0 +1,199 @@
+---
+import { getDateDiff, getPeriodText } from "@/utils/date";
+import CareerCompanyMetadata from "./career-company-metadata.astro";
+import ProfileLayout from "./profile-layout.astro";
+
+const careers = {
+  specter: {
+    logo: {
+      src: "/logo/specter.png",
+      width: 80,
+      height: 30,
+    },
+    company: "스펙터(Specter)",
+    workStartDate: "2022.11.07",
+    workEndDate: "",
+    working: true,
+    position: "Software Engineer",
+    team: "개발팀",
+    link: "https://www.specter.co.kr",
+  },
+  goorm: {
+    logo: {
+      src: "/logo/goorm.svg",
+      width: 85,
+      height: 22,
+    },
+    company: "구름(goorm)",
+    workStartDate: "2021.01.04",
+    workEndDate: "2022.06.09",
+    working: false,
+    position: "Software Engineer",
+    team: "goormIDE Squad",
+    link: "https://ide.goorm.io/",
+  },
+};
+
+const totalCareerMonth = Object.values(careers).reduce(
+  (cur, career) => cur + getDateDiff(career.workStartDate, career.workEndDate),
+  0,
+);
+
+const careerPeriod = getPeriodText(totalCareerMonth);
+---
+
+<ProfileLayout title={`경력 (${careerPeriod})`}>
+  <slot>
+    <!-- Specter -->
+    <li class="space-y-2">
+      <CareerCompanyMetadata {...careers.specter} />
+      <div>
+        {
+          [
+            "Pre-B Series 투자를 유치했습니다. (2024.12)",
+            "프로젝트의 오너를 맡아 3개월간 프로젝트를 진행했습니다.",
+            "두배 이상 커진 서비스를 어떻게 유지보수/개발 하면 좋을지 고민하고 개선했습니다.",
+            "Frontend 개발자로 입사했지만 Backend, DevOps, PM 등 다양한 역할을 경험했습니다.",
+          ].map((text) => <p class="italic">{text}</p>)
+        }
+      </div>
+
+      <div>
+        <span class="font-semibold">JQuery → Next.js 마이그레이션</span>
+        <ul>
+          <li class="list-inside list-disc">
+            40개 이상의 페이지들을 분석하고, 전반적인 설계, 퍼블리싱, 개발을
+            리드
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="font-semibold">Frontend 인프라 구축 및 개선</span>
+        <ul>
+          <li class="list-inside list-disc">
+            AWS ECS + Fargate로 인프라 관리 <a
+              class="text-sm underline"
+              href="/posts/infra/ecs-전환"
+              >FE개발자의 ECS 전환기
+            </a>
+          </li>
+          <li class="list-inside list-disc">
+            여러대의 개발서버를 하나의 인스턴스에서 관리할 수 있도록 개선 <a
+              class="text-sm underline"
+              href="/posts/infra/fe개발자가-개발서버-인프라-구성한-이야기"
+              >인프라 구성기
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="font-semibold">비지정 기능 프로젝트 오너</span>
+        <ul>
+          <li class="list-inside list-disc">
+            CX팀에서 수기로 진행하던 전반적인 프로세스를 플랫폼화
+          </li>
+          <li class="list-inside list-disc">
+            프로젝트의 오너를 맡아 3개월간 프로젝트를 진행 (PO, FE, 기획 참여)
+          </li>
+          <li class="list-inside list-disc">
+            운영 공수 60% 감소, 플랫폼 매출상품 추가
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="font-semibold">PDF 서버 구축</span>
+        <ul>
+          <li class="list-inside list-disc">
+            hono + react-pdf를 사용한 PDF 다운로드 서버 구축 및 운영
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- 구름 -->
+    <li class="space-y-2">
+      <CareerCompanyMetadata {...careers.goorm} />
+
+      <div>
+        {
+          [
+            "애자일 프로세스를 따른 매주 팀 스크럼 및 스프린트 회고를 진행했습니다.",
+            "풀스택 개발자로 인프라 및 웹 개발 경험을 쌓았습니다.",
+            `신규 제품인 "팀플러스" 제품 개발을 맡아 진행했습니다. `,
+            "IDE 개발을 하면서 복잡한 인프라 서비스가 동작하는 원리를 이해하고 개발했습니다.",
+          ].map((text) => <p class="italic">{text}</p>)
+        }
+      </div>
+
+      <div>
+        <span class="font-semibold"
+          >구름IDE - IDE 서비스 개발 및 유지보수 (2021.01 - 2022.06)</span
+        >
+        <ul>
+          <li class="list-inside list-disc">
+            AWS 클라우드 환경에서 서비스 운영 및 배포
+          </li>
+          <li class="list-inside list-disc">
+            Spring 스택에서 Hot-reload 기능 개발
+          </li>
+          <li class="list-inside list-disc">
+            Operational Transformation(ot)을 사용한 실시간 에디팅 기능 유지보수
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="font-semibold"
+          >팀플러스 Full-stack 개발 (2021.03 ~ 2022.06)</span
+        >
+        <ul>
+          <li class="list-inside list-disc">
+            구름IDE를 단체로 사용할 때 협업/관리를 위한 도구
+          </li>
+          <li class="list-inside list-disc">
+            서비스의 기획부터 출시 및 고도화 진행
+          </li>
+          <li class="list-inside list-disc">
+            A/B 테스트를 통한 합리적인 의사결정
+          </li>
+          <li class="list-inside list-disc">
+            Dockerize 환경의 사용자 컨테이너의 다양한 데이터를 시각화해서
+            보여주는 리소스 페이지 개발
+          </li>
+          <li class="list-inside list-disc">
+            react-intl을 사용한 다국어 지원 개발
+          </li>
+          <li class="list-inside list-disc">사내 Common Design System 기여</li>
+          <li class="list-inside list-disc">
+            플랜 구독형 시스템에서 옵션 결제가 가능하도록 결제 시스템 고도화
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="font-semibold"
+          >goormEXP 서비스 프로토타입 개발 (2021.12 - 2022.02)</span
+        >
+        <ul>
+          <li class="list-inside list-disc">업무/근태 관리 사내 서비스</li>
+          <li class="list-inside list-disc">
+            근태 관리 및 업무 및 관련 데이터 시각화
+          </li>
+          <li class="list-inside list-disc">
+            빠른 프로토타이핑 이후 피드백을 바탕으로 고도화
+          </li>
+          <li class="list-inside list-disc">
+            사용자 경험을 위한 요소와 함께 통계 차트 시각화 기획 및 개발 (Ant
+            Design Chart)
+          </li>
+          <li class="list-inside list-disc">
+            ClickUp, Google Sheets API를 활용한 업무 관리 시스템 구축
+          </li>
+        </ul>
+      </div>
+    </li>
+  </slot>
+</ProfileLayout>

@@ -1,0 +1,21 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import Layout from "@/layouts/Layout.astro";
+import Career from "./components/career.astro";
+import Education from "./components/education.astro";
+import ProfileHeader from "./components/profile-header.astro";
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main>
+    <ProfileHeader />
+    <hr class="my-10" />
+
+    <!-- career -->
+    <Career />
+    <hr class="my-10" />
+
+    <!-- Education -->
+    <Education />
+  </main>
+</Layout>
