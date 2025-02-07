@@ -19,9 +19,9 @@ EB환경 배포에는 몇가지 문제가 있다.
 3. 업로드 가능한 파일 limit이 500MB.
 4. Node 16 까지 지원.
 
-1번 -> 이 말은 내가 휴가를 가면 다른 사람에게 로컬 배포환경을 인수인계 하고 가야한다.
-2번 -> 빌드부터 배포까지 모든 과정이 수동으로 이뤄졌기 때문에 실수로 환경변수를 잘못 설정하면 dev 환경으로 배포될 가능성이 충분히 있다. (휴먼에러)
-3번 -> 처음에는 어찌저찌 업로드가 가능했지만, 빌드하고 node_modules 폴더도 같이 업로드가 되기 때문에 docker image도 가볍게 500MB를 넘었다.
+1번 -> 이 말은 내가 휴가를 가면 다른 사람에게 로컬 배포환경을 인수인계 하고 가야한다.<br/>
+2번 -> 빌드부터 배포까지 모든 과정이 수동으로 이뤄졌기 때문에 실수로 환경변수를 잘못 설정하면 dev 환경으로 배포될 가능성이 충분히 있다. (휴먼에러)<br/>
+3번 -> 처음에는 어찌저찌 업로드가 가능했지만, 빌드하고 node_modules 폴더도 같이 업로드가 되기 때문에 docker image도 가볍게 500MB를 넘었다.<br/>
 4번 -> 이때 LTS가 node 18 이였는데 반년이 넘도록 EB에서는 Node 16 환경만 구성이 가능했다.
 
 이런 이유로 운영 인프라 환경을 바꾸는게 필요했다.
@@ -50,7 +50,7 @@ docker build -f ${DOCKER_FILE_PATH} . -t ${LOCAL_DOCKER_TAG}
 ECS에 배포하기 위한 Docker Image를 저장하는 저장소가 필요하다.
 보통 AWS ECR 서비스를 많이 사용하는데 가격도 합리적이고 기존에 구축되어 있는 저장소가 따로 없었기 때문에 ECR을 채택했다.
 
-```
+```sh
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_HOST}
 docker tag ${LOCAL_DOCKER_TAG} ${ECR_DOCKER_TAG}
 docker push ${ECR_DOCKER_TAG}
@@ -63,7 +63,7 @@ docker push ${ECR_DOCKER_TAG}
 ECS에 배포하기 위해서는 Task정의가 필요하다.
 Task Definition에는 ECS에 어떤 이미지를 배포하고 어떤 경로로 health check를 하며 어떤 사양으로 인스턴스를 띄울지 등 Application 인스턴스 구성에 필요한 내용으로 채워진다.
 
-```
+```json
 {
     "taskDefinitionArn": "{Task Definition ARN}",
     "containerDefinitions": [

@@ -1,5 +1,5 @@
 ---
-title: "FE개발자가 개발서버 인프라 구성한 이야기"
+title: "FE개발자가 개발서버 12대 인프라 구성한 이야기"
 date: 2024-03-30
 description: FE 개발자가 dockerize 환경에서 개발서버 12개 구성한 이야기
 category: 인프라
@@ -18,7 +18,7 @@ tags:
 먼저 프로세스를 정립해야했다. 기존에 git flow 브랜치 전략을 버리고 새로운 버저닝 시스템을 도입했다.
 Trunk base에 가까운 버전 관리 전략을 선택했고 프로세스는 아래와 같다.
 
-![[Pasted image 20240510004646.png]]
+![Image](https://github.com/user-attachments/assets/8a51e3cb-6b27-4d33-9f02-899da1d45fe0)
 
 1. 프로젝트 kickoff와 동시에 main 브랜치 base의 버전 생성
    - 버전명 `kickoff-{kickoff date}-{project summary}`
@@ -59,7 +59,7 @@ Trunk base에 가까운 버전 관리 전략을 선택했고 프로세스는 아
 
 구성이 완료된 인프라 구조는 아래와 같다.
 
-![[Pasted image 20240512232703.png]]
+![image](https://github.com/user-attachments/assets/49a6ea3d-e666-4bd2-9a4b-59b51959b4bc)
 
 1. 어플리케이션은 docker compose로 관리하고 docker image는 ECR에서 관리한다.
 2. Jenkins에서 빌드한 각 어플리케이션을 ECR에 업로드하고 docker compose에서 사용한다.
@@ -73,9 +73,9 @@ Trunk base에 가까운 버전 관리 전략을 선택했고 프로세스는 아
 
 개발 서버가 많아지다보니 몇번 개발 서버에 어떤 내용이 배포되었는지 PM, QA와 소통이 필요했는데, 이를 위해서 배포 내용을 요약해서 볼 수 있으면 좋겠다고 느꼈다.
 그래서 어떤 dev 서버에 어떤 내용이 배포되었는지 알아볼 수 있도록 대시보드를 만들었다.
-cloud watch로 배포 로그를 저장하고 lambda로 로그를 불러오면서 api gateway가 데이터를 서빙할 수 있도록 endpoint를 구성했다.
+cloud watch로 배포 로그를 저장하고 lambda로 로그를 불러오면서 api gateway가 데이터를 서빙할 수 있도록 endpoint를 구성했다.
 
-![[image.png]]
+![Image](https://github.com/user-attachments/assets/1498beae-dd28-437a-8a5c-136cc0befc91)
 흐린 이미지로 대체.
 과정에서 aws-sdk cloudwatch의 [GetMetricData](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html) Node API를 사용했는데, 로그 row가 조금만 많아져도 실시간으로 데이터를 fetch 해 오기에는 속도나 안정성에 문제가 있어보였다. API 호출이 5번에 1번꼴로만 성공하고 속도도 굉장히 느렸다. 그래서 배포마다 S3에 파일로 로그 파일을 최신화해서 업로드하고 해당 파일을 fetch해서 가져오고 파싱하는 식으로 구성했다. 물론 S3 로그 파일에는 최근 100건만 저장하도록 했다.
 
