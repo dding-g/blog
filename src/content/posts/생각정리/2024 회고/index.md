@@ -2,8 +2,8 @@
 title: 2024 회고
 date: 2025-01-31
 description: 2024년은 어땠나요?
-category: 회고
-tags: ["회고"]
+category: 생각정리
+tags: ["회고", "생각정리"]
 draft: false
 ---
 

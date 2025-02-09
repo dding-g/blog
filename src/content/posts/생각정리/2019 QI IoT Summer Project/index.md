@@ -2,8 +2,8 @@
 title: 2019 QI IoT Summer Project
 date: 2019-10-14
 description: 2019 QI IoT Summer Project
-category: 해외경험
-tags: ["해외경험"]
+category: 생각정리
+tags: ["해외경험", "생각정리"]
 draft: false
 ---
 

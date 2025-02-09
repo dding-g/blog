@@ -2,8 +2,8 @@
 title: 2023 회고
 date: 2024-01-10
 description: 2023년에는 무엇을 했는가
-category: 회고
-tags: ["회고"]
+category: 생각정리
+tags: ["회고", "생각정리"]
 draft: false
 ---
 

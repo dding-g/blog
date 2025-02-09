@@ -2,8 +2,8 @@
 title: 2022까지의 회고
 date: 2023-01-15
 description: 2022까지의 회고
-category: 회고
-tags: ["회고"]
+category: 생각정리
+tags: ["회고", "생각정리"]
 draft: false
 ---
 
