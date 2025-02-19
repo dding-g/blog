@@ -6,7 +6,7 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string().nullish(),
     date: z.coerce.date(),
-    image: z.string().default("/static/blog-placeholder.png"),
+    image: z.string().default("/profile.webp"),
   }),
 });
 

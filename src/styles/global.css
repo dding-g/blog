@@ -141,5 +141,22 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: url("data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20width='8'%20height='8'%20fill='none'%20stroke='rgb(0%200%200%20/%200.1)'%3e%3cpath%20d='M0%20.5H31.5V32'/%3e%3c/svg%3e");
+    background-repeat: repeat;
+  }
+
+  /* number of lines */
+  code {
+    counter-reset: step;
+    counter-increment: step 0;
+  }
+  code .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: right;
+    color: hsla(0, 0%, 53%, 1);
   }
 }
