@@ -90,24 +90,5 @@ const { title, description, image = "/profile.webp", className } = Astro.props;
 </html>
 
 <script is:inline>
-  const setTheme = () => {
-    let theme = "light";
-
-    document.documentElement.classList[theme ? "add" : "remove"](theme);
-
-    if (typeof localStorage !== "undefined") {
-      const observer = new MutationObserver(() => {
-        const isDark = document.documentElement.classList.contains("dark");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-      });
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["class"],
-      });
-    }
-  };
-
-  setTheme();
-
-  document.addEventListener("astro:after-swap", setTheme);
+  document.documentElement.classList["add"]("light");
 </script>
