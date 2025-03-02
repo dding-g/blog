@@ -17,6 +17,26 @@ const careers = {
     position: "Software Engineer",
     team: "개발팀",
     link: "https://www.specter.co.kr",
+    techStack: [
+      "react",
+      "next.js",
+      "zustand",
+      "react-query",
+      "react-hook-form",
+      "sass",
+      "emotion",
+      "tailwindcss",
+      "vitest",
+      "storybook",
+      "turbo",
+      "git",
+      "github",
+      "jira",
+      "confluence",
+      "aWS",
+      "docker",
+      "typeScript",
+    ],
   },
   goorm: {
     logo: {
@@ -31,6 +51,29 @@ const careers = {
     position: "Software Engineer",
     team: "goormIDE Squad",
     link: "https://ide.goorm.io/",
+    techStack: [
+      "React",
+      "Next.js",
+      "git",
+      "github",
+      "ClickUp",
+      "AWS",
+      "Docker",
+    ],
+  },
+  프리랜서: {
+    logo: {
+      src: "/logo/freelancer.png",
+      width: 85,
+      height: 85,
+    },
+    company: "프리랜서",
+    workStartDate: "2022.07",
+    workEndDate: "2022.11",
+    working: false,
+    position: "Frontend Engineer",
+    team: "개발팀",
+    techStack: ["vue3", "javascript", "vuetify", "pinia"],
   },
 };
 
@@ -59,16 +102,6 @@ const careerPeriod = getPeriodText(totalCareerMonth);
       </div>
 
       <div>
-        <span class="font-semibold">JQuery → Next.js 마이그레이션</span>
-        <ul>
-          <li class="list-inside list-disc">
-            40개 이상의 페이지들을 분석하고, 전반적인 설계, 퍼블리싱, 개발을
-            리드
-          </li>
-        </ul>
-      </div>
-
-      <div>
         <span class="font-semibold">Frontend 인프라 구축 및 개선</span>
         <ul>
           <li class="list-inside list-disc">
@@ -89,7 +122,9 @@ const careerPeriod = getPeriodText(totalCareerMonth);
       </div>
 
       <div>
-        <span class="font-semibold">비지정 기능 프로젝트 오너</span>
+        <span class="font-semibold"
+          >비지정 기능 프로젝트 오너 (2024.06 ~ 2024.09)</span
+        >
         <ul>
           <li class="list-inside list-disc">
             CX팀에서 수기로 진행하던 전반적인 프로세스를 플랫폼화
@@ -98,16 +133,33 @@ const careerPeriod = getPeriodText(totalCareerMonth);
             프로젝트의 오너를 맡아 3개월간 프로젝트를 진행 (PO, FE, 기획 참여)
           </li>
           <li class="list-inside list-disc">
-            운영 공수 60% 감소, 플랫폼 매출상품 추가
+            운영 공수 60% 감소, 플랫폼 매출상품 추가 (플랫폼 전체 매출의 N%
+            기여)
           </li>
         </ul>
       </div>
 
       <div>
-        <span class="font-semibold">PDF 서버 구축</span>
+        <span class="font-semibold">PDF 서버 구축 (2024.11, 2주)</span>
         <ul>
           <li class="list-inside list-disc">
-            hono + react-pdf를 사용한 PDF 다운로드 서버 구축 및 운영
+            hono + react-pdf를 사용한 스펙터 평판 데이터 PDF 다운로드 서버 구축
+            및 운영
+          </li>
+          <li class="list-inside list-disc">
+            Django로 구현되어 있던 PDF 서버 마이그레이션
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="font-semibold"
+          >JQuery → Next.js 마이그레이션 (2022.12 ~ 2023.03)</span
+        >
+        <ul>
+          <li class="list-inside list-disc">
+            40개 이상의 페이지들을 분석하고, 전반적인 설계, 퍼블리싱, 개발을
+            리드
           </li>
         </ul>
       </div>
@@ -122,7 +174,7 @@ const careerPeriod = getPeriodText(totalCareerMonth);
           [
             "애자일 프로세스를 따른 매주 팀 스크럼 및 스프린트 회고를 진행했습니다.",
             "풀스택 개발자로 인프라 및 웹 개발 경험을 쌓았습니다.",
-            `신규 제품인 "팀플러스" 제품 개발을 맡아 진행했습니다. `,
+            `신규 제품인 "팀플러스" 제품 개발을 맡아 진행했습니다.`,
             "IDE 개발을 하면서 복잡한 인프라 서비스가 동작하는 원리를 이해하고 개발했습니다.",
           ].map((text) => <p class="italic">{text}</p>)
         }

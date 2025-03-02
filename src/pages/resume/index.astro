@@ -1,6 +1,7 @@
 ---
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 import Layout from "@/layouts/Layout.astro";
+import Activity from "./components/activity.astro";
 import Career from "./components/career.astro";
 import Education from "./components/education.astro";
 import ProfileHeader from "./components/profile-header.astro";
@@ -13,6 +14,10 @@ import ProfileHeader from "./components/profile-header.astro";
 
     <!-- career -->
     <Career />
+    <hr class="my-10" />
+
+    <!-- Activity -->
+    <Activity />
     <hr class="my-10" />
 
     <!-- Education -->
