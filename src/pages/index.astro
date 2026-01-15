@@ -1,39 +1,117 @@
 ---
+import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
+import { formatDate } from "../lib/utils";
+
+const collection = await getCollection("posts");
+const recentPosts = collection
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 
-<Layout
-  title={SITE_TITLE}
-  description={SITE_DESCRIPTION}
-  className="flex max-w-md flex-col justify-center"
->
-  <main class="space-y-4">
-    <p>
-      👋 안녕하세요. 개발자 조명근입니다.<br />
-      Gray zone을 발견하면 먼저 나서서 해결하려합니다.<br />
-      커뮤니티의 힘을 믿습니다.<br />
-      다양한 사람들과 소통하며 생각을 듣고 공유하는걸 좋아합니다.
-    </p>
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <div class="space-y-20">
+    <!-- Hero Section -->
+    <section class="space-y-8">
+      <div class="space-y-4">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
+          Frontend Developer
+        </p>
+        <h1 class="text-4xl font-semibold tracking-[-0.03em] text-zinc-900 sm:text-5xl dark:text-zinc-100">
+          조명근
+        </h1>
+      </div>
 
-    <p>
-      <a
-        href="https://github.com/dding-g"
-        target="_blank"
-        class="text-blue-500 underline">Github</a
-      >
+      <div class="max-w-lg space-y-4 text-zinc-600 dark:text-zinc-400">
+        <p class="leading-relaxed">
+          Gray zone을 발견하면 먼저 나서서 해결하려합니다.
+        </p>
+        <p class="leading-relaxed">
+          커뮤니티의 힘을 믿습니다. 다양한 사람들과 소통하며 생각을 듣고 공유하는걸 좋아합니다.
+        </p>
+      </div>
 
-      <a
-        href="https://www.linkedin.com/in/ddingg/"
-        target="_blank"
-        class="text-blue-500 underline">Linkedin</a
-      >
+      <div class="flex items-center gap-6 pt-2">
+        <a
+          href="https://github.com/dding-g"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-center gap-2 font-mono text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+        >
+          <span class="relative">
+            Github
+            <span class="absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
+          </span>
+          <svg class="h-3 w-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/ddingg/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-center gap-2 font-mono text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+        >
+          <span class="relative">
+            LinkedIn
+            <span class="absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
+          </span>
+          <svg class="h-3 w-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+        <a
+          href="https://dding-g.notion.site/1929dabeb9c7809eb426fc293e142128?v=1929dabeb9c7808399e1000cc5282642&pvs=4"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-center gap-2 font-mono text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+        >
+          <span class="relative">
+            Notes
+            <span class="absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
+          </span>
+          <svg class="h-3 w-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </section>
 
-      <a
-        href="https://dding-g.notion.site/1929dabeb9c7809eb426fc293e142128?v=1929dabeb9c7808399e1000cc5282642&pvs=4"
-        target="_blank"
-        class="text-blue-500 underline">가벼운 기록</a
-      >
-    </p>
-  </main>
+    <!-- Recent Posts Section -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
+          Recent Posts
+        </h2>
+        <a
+          href="/posts"
+          class="group font-mono text-xs text-zinc-400 transition-colors hover:text-zinc-900 dark:text-zinc-600 dark:hover:text-zinc-100"
+        >
+          <span class="relative">
+            View all
+            <span class="absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
+          </span>
+        </a>
+      </div>
+
+      <div class="space-y-0 divide-y divide-zinc-200/60 dark:divide-zinc-800/60">
+        {
+          recentPosts.map((post) => (
+            <a
+              href={`/posts/${post.slug}`}
+              class="group flex flex-col gap-1 py-4 transition-colors first:pt-0 last:pb-0"
+            >
+              <span class="font-medium text-zinc-800 transition-colors group-hover:text-zinc-900 dark:text-zinc-200 dark:group-hover:text-zinc-100">
+                {post.data.title}
+              </span>
+              <span class="font-mono text-xs text-zinc-400 dark:text-zinc-600">
+                {formatDate(post.data.date)}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 </Layout>

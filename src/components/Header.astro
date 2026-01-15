@@ -1,19 +1,52 @@
 ---
+const currentPath = Astro.url.pathname;
 
+const navItems = [
+  { href: "/posts", label: "posts" },
+  { href: "/resume.pdf", label: "resume", external: true },
+];
 ---
 
-<header class="mb-6 flex items-center justify-between" transition:name="header">
-  <nav class="flex items-center gap-4">
-    <a href="/">
-      <img src="/logo.svg" alt="logo" width="32" height="32" />
-    </a>
-    <a href="/posts"> posts </a>
-    <a href="/resume.pdf" target="_blank"> resume </a>
+<header
+  class="animate-slide-in mb-16 flex items-center justify-between opacity-0"
+  transition:name="header"
+>
+  <a
+    href="/"
+    class="group flex items-center gap-3 transition-opacity hover:opacity-70"
+  >
+    <div class="relative">
+      <img src="/logo.svg" alt="logo" width="28" height="28" class="relative z-10" />
+      <div class="absolute -inset-1 bg-amber-400/20 opacity-0 blur-sm transition-opacity group-hover:opacity-100"></div>
+    </div>
+    <span class="hidden font-mono text-sm tracking-tight text-zinc-400 sm:inline dark:text-zinc-600">
+      dding-glog
+    </span>
+  </a>
+
+  <nav class="flex items-center gap-1">
+    {
+      navItems.map((item) => {
+        const isActive = currentPath.startsWith(item.href);
+        return (
+          <a
+            href={item.href}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+            class:list={[
+              "relative px-3 py-1.5 font-mono text-sm transition-colors",
+              isActive
+                ? "text-zinc-900 dark:text-zinc-100"
+                : "text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100",
+            ]}
+          >
+            {item.label}
+            {isActive && (
+              <span class="absolute bottom-0 left-3 right-3 h-px bg-zinc-900 dark:bg-zinc-100" />
+            )}
+          </a>
+        );
+      })
+    }
   </nav>
 </header>
-
-<style>
-  a {
-    @apply font-medium text-zinc-400 hover:text-zinc-900 hover:underline dark:hover:text-zinc-100;
-  }
-</style>
