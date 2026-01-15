@@ -8,8 +8,14 @@ const config: Config = {
   	extend: {
   		fontFamily: {
   			sans: [
-  				'Geist',
-                    ...defaultTheme.fontFamily.sans
+  				'Pretendard Variable',
+  				'Pretendard',
+  				...defaultTheme.fontFamily.sans
+                ],
+  			serif: [
+  				'RIDIBatang',
+  				'Noto Serif KR',
+  				...defaultTheme.fontFamily.serif
                 ],
   			mono: [
   				'Geist Mono',
